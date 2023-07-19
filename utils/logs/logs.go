@@ -17,3 +17,7 @@ func Deubg(fields map[string]interface{}, message string) {
 func Error(fields map[string]interface{}, message string) {
 	logrus.WithFields(fields).Error(message)
 }
+
+func Fatal(fields map[string]interface{}, message string) {
+	logrus.WithFields(fields).Fatal(message)
+}

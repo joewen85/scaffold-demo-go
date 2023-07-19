@@ -3,6 +3,7 @@ package config
 import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"os"
 	"scaffold-demo-go/utils/logs"
 )
 
@@ -10,7 +11,11 @@ const (
 	TimeFormat = "2006-01-02 15:04:05.000"
 )
 
-var Port string
+var (
+	Port       string
+	SigningKey string
+	ExpireTime uint64
+)
 
 func initLogSetting(logLevel string) {
 	if logLevel == "debug" {
@@ -33,4 +38,13 @@ func init() {
 	logLevel := viper.GetString("LOG_LEVEL")
 	Port = viper.GetString("PORT")
 	initLogSetting(logLevel)
+
+	//	jwt
+	SigningKey = viper.GetString("SECRET_KEY")
+	if SigningKey == "" {
+		logs.Error(nil, "environment not set SECRET_KEY")
+		os.Exit(1)
+	}
+	viper.SetDefault("JWT_EXPIRE_TIME", 86400)
+	ExpireTime = viper.GetUint64("JWT_EXPIRE_TIME")
 }

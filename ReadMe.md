@@ -11,7 +11,7 @@ export LOG_LEVEL="info"
 
 export JWT_EXPIRE_TIME=3600
 ```
-SECRET_KEY: jwt secret key. 设置复杂点
+SECRET_KEY: jwt secret key. 设置复杂点. debug模式自动使用"joe12345"作为secret_key
 
 PORT: 应用监听端口
 

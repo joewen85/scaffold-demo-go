@@ -2,7 +2,6 @@ package jwtauth
 
 import (
 	"errors"
-	"fmt"
 	"github.com/golang-jwt/jwt/v5"
 	"scaffold-demo-go/config"
 	"scaffold-demo-go/utils/logs"
@@ -41,7 +40,6 @@ func ParseJwt(tokenString string) (*JwtClaims, error) {
 	}
 
 	if claims, ok := token.Claims.(*JwtClaims); ok && token.Valid {
-		fmt.Println("token claims验证成功")
 		return claims, nil
 	} else {
 		return nil, errors.New("token claims验证失败")

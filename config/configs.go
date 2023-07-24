@@ -15,11 +15,20 @@ var (
 	Port       string
 	SigningKey string
 	ExpireTime uint64
+	Username   string
+	Password   string
 )
+
+type ReturnData struct {
+	Status  int                    `json:"status"`
+	Message string                 `json:"message"`
+	Data    map[string]interface{} `json:"data"`
+}
 
 func initLogSetting(logLevel string) {
 	if logLevel == "debug" {
 		log.SetLevel(log.DebugLevel)
+		_ = os.Setenv("SECRET_KEY", "joe123456")
 	} else {
 		log.SetLevel(log.InfoLevel)
 	}

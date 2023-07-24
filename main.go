@@ -1,17 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"scaffold-demo-go/config"
-	"scaffold-demo-go/middlewares/jwtauth"
+	"scaffold-demo-go/middlewares/jwtvalid"
+	"scaffold-demo-go/routers"
 )
 
 func main() {
 	r := gin.Default()
-	token, _ := jwtauth.GenerateJwt("joe")
-	claims, err := jwtauth.ParseJwt(token)
-	fmt.Println(claims)
-	fmt.Println(err)
+	r.Use(jwtvalid.JwtValid)
+	routers.RegisterRouters(r)
 	r.Run(config.Port)
 }
